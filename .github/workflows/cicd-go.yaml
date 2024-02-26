@@ -37,6 +37,6 @@ jobs:
       - name: Install golangci-lint
         uses: golangci/golangci-lint-action@v4
         with:
-          version: ${{ inputs.golangci-lint-version }}
+          version: v${{ inputs.golangci-lint-version }}
       - name: Check
         run: make ${{ inputs.make-target-check }}
