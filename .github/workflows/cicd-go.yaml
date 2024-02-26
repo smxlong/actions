@@ -7,14 +7,17 @@ on:
   workflow_call:
     inputs:
       go-version:
+        type: string
         required: true
         description: Go version to use
         default: 1.21.6
       golangci-lint-version:
+        type: string
         required: true
         description: golangci-lint version to use
         default: 1.56.2
       make-target-check:
+        type: string
         required: true
         description: Make target to run for checking
         default: check
