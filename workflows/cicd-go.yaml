@@ -6,6 +6,18 @@ name: CI/CD Go
 on:
   workflow_call:
     inputs:
+      go-version:
+        required: true
+        description: Go version to use
+        default: 1.21.6
+      golangci-lint-version:
+        required: true
+        description: golangci-lint version to use
+        default: 1.56.2
+      make-target-check:
+        required: true
+        description: Make target to run for checking
+        default: check
     secrets:
 
 jobs:
@@ -18,11 +30,11 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version: 1.21.6
+          go-version: ${{ inputs.go-version }}
           cache: false
       - name: Install golangci-lint
         uses: golangci/golangci-lint-action@v4
         with:
-          version: 1.56.2
+          version: ${{ inputs.golangci-lint-version }}
       - name: Check
-        run: make check
+        run: make ${{ inputs.make-target-check }}
