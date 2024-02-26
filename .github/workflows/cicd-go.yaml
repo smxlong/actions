@@ -21,7 +21,6 @@ on:
         required: true
         description: Make target to run for checking
         default: check
-    secrets:
 
 jobs:
   check:
