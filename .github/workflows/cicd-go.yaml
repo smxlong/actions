@@ -16,6 +16,11 @@ on:
         required: false
         description: golangci-lint version to use
         default: 1.56.2
+      golangci-lint-timeout:
+        type: string
+        required: false
+        description: golangci-lint timeout
+        default: 5m
       make-target-check:
         type: string
         required: false
@@ -38,5 +43,7 @@ jobs:
         uses: golangci/golangci-lint-action@v4
         with:
           version: v${{ inputs.golangci-lint-version }}
+          args: |
+            --timeout=${{ inputs.golangci-lint-timeout }}
       - name: Check
         run: make ${{ inputs.make-target-check }}
