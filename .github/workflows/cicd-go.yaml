@@ -10,7 +10,7 @@ on:
         type: string
         required: false
         description: Go version to use
-        default: 1.21.6
+        default: 1.22.0
       golangci-lint-version:
         type: string
         required: false
@@ -35,15 +35,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Go
-        uses: actions/setup-go@v5
+        uses: ./setup-go
         with:
           go-version: ${{ inputs.go-version }}
-          cache: false
-      - name: Install golangci-lint
-        uses: golangci/golangci-lint-action@v4
-        with:
-          version: v${{ inputs.golangci-lint-version }}
-          args: |
-            --timeout=${{ inputs.golangci-lint-timeout }}
+          golangci-lint-version: ${{ inputs.golangci-lint-version }}
+          golangci-lint-timeout: ${{ inputs.golangci-lint-timeout }}
       - name: Check
         run: make ${{ inputs.make-target-check }}

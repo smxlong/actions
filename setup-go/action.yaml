@@ -1,0 +1,31 @@
+name: Set up Go
+description: Set up Go
+
+inputs:
+  go-version:
+    description: The Go version to set up
+    required: false
+    default: 1.22.0
+  golangci-lint-version:
+    description: The golangci-lint version to set up
+    required: false
+    default: 1.56.2
+  golangci-lint-timeout:
+    description: The golangci-lint timeout
+    required: false
+    default: 5m
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: ${{ inputs.go-version }}
+        cache: false
+    - name: Install golangci-lint
+      uses: golangci/golangci-lint-action@v4
+      with:
+        version: v${{ inputs.golangci-lint-version }}
+        args: |
+          --timeout=${{ inputs.golangci-lint-timeout }}
